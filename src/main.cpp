@@ -8,7 +8,28 @@ int main() {
 
     Rotor rotor(data);
 
-    rotor.Print();
+    // std::cout << "Forward Map" << std::endl;
+    // rotor.PrintForwardMap();
+    // std::cout << "Reverse Map" << std::endl;
+    // rotor.PrintReverseMap();
 
+    char inputChar = 'a';
+    std::cout << "Original char: " << inputChar << std::endl;
+    char encryptedChar = rotor.encrypt(inputChar);
+    std::cout << "Encrypted char: " << encryptedChar << std::endl;
+
+    char decryptedChar = rotor.decrypt(encryptedChar);
+    std::cout << "Decrypted char: " << decryptedChar << std::endl;
+
+
+    inputChar = 'b';
+    std::cout << "Original char: " << inputChar << std::endl;
+
+
+    encryptedChar = rotor.encrypt(inputChar);
+    std::cout << "Encrypted char: " << encryptedChar << std::endl;
+
+    decryptedChar = rotor.decrypt(encryptedChar);
+    std::cout << "Decrypted char: " << decryptedChar << std::endl;
 
 }
