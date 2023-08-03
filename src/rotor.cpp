@@ -16,24 +16,27 @@ Rotor::~Rotor()
 {
 }
 
+void Rotor::setPosition(int position) {
+    currentPosition = position;
+}
+
 void Rotor::rotate() {
     currentPosition = (currentPosition + 1) % 26;
 }
 
-char Rotor::encrypt(char input) const {
+char Rotor::encrypt(char input) {
     char mappedChar = forwardMap.at(input);
     mappedChar = 'a' + (mappedChar - 'a' + currentPosition) % 26;
+
+    rotate();
     return mappedChar;
 }
 
-char Rotor::decrypt(char input) const {
+char Rotor::decrypt(char input) {
     char mappedChar = 'a' + (input - 'a' - currentPosition + 26) % 26;
+
+    rotate();
     return reverseMap.at(mappedChar);
-}
-
-std::string Rotor::encode(const std::string& data)
-{
-
 }
 
 void Rotor::PrintForwardMap()

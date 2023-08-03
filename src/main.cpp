@@ -3,33 +3,36 @@
 #include "../include/utils.h"
 #include "../include/rotor.h"
 
+std::string encode(const std::string& plaintext) {
+    std::unordered_map<char, char> randomPair = readDataFromFile("rotor1");
+    Rotor rotor(randomPair);
+    std::string encodedText;
+
+    for (char c : plaintext) {
+        encodedText += rotor.encrypt(c);
+    }
+    return encodedText;
+}
+
+std::string decode(const std::string& encodedText) {
+    std::unordered_map<char, char> randomPair = readDataFromFile("rotor1");
+    Rotor rotor(randomPair);
+    std::string decodedText;
+
+    for (char c : encodedText) {
+        decodedText += rotor.decrypt(c);
+    }
+    return decodedText;
+}
+
 int main() {
-    std::unordered_map<char, char> data = readDataFromFile("rotor1");
+    std::string plaintext = "hello";
+    std::string encodedText = encode(plaintext);
 
-    Rotor rotor(data);
+    std::cout << "Plaintext: " << plaintext << std::endl;
+    std::cout << "Encoded string: " << encodedText << std::endl;
 
-    // std::cout << "Forward Map" << std::endl;
-    // rotor.PrintForwardMap();
-    // std::cout << "Reverse Map" << std::endl;
-    // rotor.PrintReverseMap();
-
-    char inputChar = 'a';
-    std::cout << "Original char: " << inputChar << std::endl;
-    char encryptedChar = rotor.encrypt(inputChar);
-    std::cout << "Encrypted char: " << encryptedChar << std::endl;
-
-    char decryptedChar = rotor.decrypt(encryptedChar);
-    std::cout << "Decrypted char: " << decryptedChar << std::endl;
-
-
-    inputChar = 'b';
-    std::cout << "Original char: " << inputChar << std::endl;
-
-
-    encryptedChar = rotor.encrypt(inputChar);
-    std::cout << "Encrypted char: " << encryptedChar << std::endl;
-
-    decryptedChar = rotor.decrypt(encryptedChar);
-    std::cout << "Decrypted char: " << decryptedChar << std::endl;
+    std::string decodedText = decode(encodedText);
+    std::cout << "Decoded Text: " << decodedText << std::endl;
 
 }

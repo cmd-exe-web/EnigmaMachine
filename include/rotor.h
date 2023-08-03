@@ -12,12 +12,12 @@ public:
     Rotor(std::unordered_map<char, char> substitutions);
     ~Rotor();
 
+    void setPosition(int position);
+
     void rotate();
 
-    char encrypt(char input) const;
-    char decrypt(char input) const;
-
-    std::string encode(const std::string& data);
+    char encrypt(char input);
+    char decrypt(char input);
 
     void PrintForwardMap();
     void PrintReverseMap();
