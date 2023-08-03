@@ -23,3 +23,7 @@ Release/
 
 # Visual Studio Code specific files
 .vscode/
+
+
+*.d
+myapp
