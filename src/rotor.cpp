@@ -39,6 +39,25 @@ char Rotor::decrypt(char input) {
     return reverseMap.at(mappedChar);
 }
 
+std::string Rotor::encode(const std::string& plaintext) {
+
+    std::string encodedText;
+
+    for (char c : plaintext) {
+        encodedText += encrypt(c);
+    }
+    return encodedText;
+}
+
+std::string Rotor::decode(const std::string& encodedText) {
+    std::string decodedText;
+
+    for (char c : encodedText) {
+        decodedText += decrypt(c);
+    }
+    return decodedText;
+}
+
 void Rotor::PrintForwardMap()
 {
     for (auto&& it : forwardMap)

@@ -19,6 +19,9 @@ public:
     char encrypt(char input);
     char decrypt(char input);
 
+    std::string encode(const std::string& plaintext);
+    std::string decode(const std::string& encodedText);
+
     void PrintForwardMap();
     void PrintReverseMap();
 };
