@@ -1,29 +1,41 @@
 #include <iostream>
 #include <unordered_map>
+#include <unordered_set>
 #include <random>
 #include <algorithm>
 #include <fstream>
+#include <numeric>
 
 
 std::unordered_map<char, char> createRandomPair()
 {
-    std::vector<int> randomNumbers(26);
-    std::iota(randomNumbers.begin(), randomNumbers.end(), 0);
+    std::vector<int> randomLetters;
+    std::unordered_map<char, char> randomPair;
+    std::unordered_set<int> usedIndices;
 
     std::random_device rd;
     std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(0, 25);
 
-    std::shuffle(randomNumbers.begin(), randomNumbers.end(), gen);
+    for (int i = 0; i < 26; i++) {
+        int randomIndex = dist(gen);
 
+        while (usedIndices.find(randomIndex) != usedIndices.end() || randomIndex == i) {
+            randomIndex = dist(gen);
+        }
 
-    std::unordered_map<char, char> randomPairs;
+        usedIndices.insert(randomIndex);
+        randomLetters.push_back(randomIndex);
+    }
 
     for (int i = 0; i < 26; i++)
     {
-        randomPairs['a' + i] = 'a' + randomNumbers[i];
-    }
+        char original = 'a' + i;
+        char mapped = 'a' + randomLetters[i];
 
-    return randomPairs;
+        randomPair[original] = mapped;
+    }
+    return randomPair;
 }
 
 
