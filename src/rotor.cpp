@@ -56,12 +56,14 @@ void Rotor::print(){
 
 int Rotor::forwardPass(int letter)
 {
-    return forwardMap[letter];
+    int shift = (letter + currentPosition) % 26;
+    return (forwardMap[shift] - currentPosition + 26) % 26;
 }
 
 int Rotor::backwardPass(int letter)
 {
-    return reverseMap[letter];
+    int shift = (letter + currentPosition) % 26;
+    return (reverseMap[shift] - currentPosition + 26) % 26;
 }
 
 void Rotor::rotate()
@@ -94,7 +96,8 @@ void Rotor::show()
     std::cout << std::endl;
 }
 
-void Rotor::set(int number)
+void Rotor::set(char letter)
 {
+    int number = letter - 'A';
     currentPosition = number;
 }

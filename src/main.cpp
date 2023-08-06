@@ -22,12 +22,21 @@ int main() {
     Keyboard keyboard;
     
     Plugboard plugboard;
-    std::string swit[] = {"AR", "GK", "OX"};
+    std::string swit[] = {"AB", "CD", "EF"};
     plugboard.swap(swit, 3);
 
-    EnigmaMachine enigma(I, II, III, A, keyboard, plugboard);
+    EnigmaMachine enigma(IV, II, I, B, keyboard, plugboard);
+    enigma.set_key("CAT");
+    // enigma.rightRotor.show();
 
-    std::cout << enigma.encipher('A') << std::endl;
+    std::string message = "TEST";
+    std::string ciphertext;
+
+    for (auto letter : message)
+    {
+        ciphertext += enigma.encipher(letter);
+    }
+        std::cout << ciphertext << std::endl;
     
 
     // I.show();

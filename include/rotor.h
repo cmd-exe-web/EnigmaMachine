@@ -2,7 +2,7 @@
 
 class Rotor
 {
-private:
+public:
     int forwardMap[26];
     int reverseMap[26];
     int currentPosition;
@@ -20,5 +20,5 @@ public:
     void rotate();
     void show();
 
-    void set(int number);
+    void set(char letter);
 };

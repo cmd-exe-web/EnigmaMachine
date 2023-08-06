@@ -7,9 +7,11 @@
 #include "../include/rotor.h"
 #include "../include/reflector.h"
 
+#include <string>
+
 class EnigmaMachine
 {
-private:
+public:
     Rotor leftRotor;
     Rotor middleRotor;
     Rotor rightRotor;
@@ -26,6 +28,8 @@ public:
     Keyboard keyboard,
     Plugboard plugboard);
     ~EnigmaMachine();
+
+    void set_key(std::string key);
 
     char encipher(char letter);
 };

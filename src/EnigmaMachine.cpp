@@ -10,8 +10,39 @@ EnigmaMachine::~EnigmaMachine()
 {
 }
 
+void EnigmaMachine::set_key(std::string key)
+{
+    leftRotor.set(key[0]);
+    middleRotor.set(key[1]);
+    rightRotor.set(key[2]);
+}
+
 char EnigmaMachine::encipher(char letter)
 {
+    // rotating the rotor
+    if(middleRotor.currentPosition == middleRotor.notch && rightRotor.currentPosition == rightRotor.notch)
+    {
+        rightRotor.rotate();
+        middleRotor.rotate();
+        leftRotor.rotate();
+    }
+    // double step anomaly
+    else if(middleRotor.currentPosition == middleRotor.notch)
+    {
+        rightRotor.rotate();
+        middleRotor.rotate();
+        leftRotor.rotate();
+    }
+    else if(rightRotor.currentPosition == rightRotor.notch)
+    {
+        middleRotor.rotate();
+        rightRotor.rotate();
+    }
+    else
+    {
+        rightRotor.rotate();
+    }
+
     // passing signal through the machine
     int signal = keyboard.forward(letter);
     signal = plugboard.forward(signal);
