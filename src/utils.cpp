@@ -73,3 +73,9 @@ std::unordered_map<char, char> readDataFromFile(const std::string& filename) {
     inputFile.close();
     return data;
 }
+
+void printMap(){
+    for(int i = 0; i < 26; i++){
+        std::cout << i << "->" << (char)('A' + i) << std::endl;
+    }
+}
