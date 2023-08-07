@@ -58,3 +58,18 @@ char EnigmaMachine::encipher(char letter)
 
     return encoded;
 }
+
+std::string EnigmaMachine::encipher_string(std::string message)
+{
+    std::string ciphertext;
+    for (auto letter : message)
+    {
+        ciphertext += encipher(letter);
+    }
+
+    return ciphertext;
+}
+void EnigmaMachine::set_ring_setting(char str[])
+{
+    
+}

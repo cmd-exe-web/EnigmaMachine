@@ -29,14 +29,9 @@ int main() {
     enigma.set_key("CAT");
     // enigma.rightRotor.show();
 
-    std::string message = "TEST";
-    std::string ciphertext;
-
-    for (auto letter : message)
-    {
-        ciphertext += enigma.encipher(letter);
-    }
-        std::cout << ciphertext << std::endl;
+    std::string message = "TESTINGTESTINGTESTINGTESTING";
+    
+    std::cout << enigma.encipher_string(message) << std::endl;
     
 
     // I.show();

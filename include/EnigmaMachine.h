@@ -32,4 +32,7 @@ public:
     void set_key(std::string key);
 
     char encipher(char letter);
+    std::string encipher_string(std::string message);
+
+    void set_ring_setting(char str[]);
 };
