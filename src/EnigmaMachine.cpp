@@ -71,5 +71,7 @@ std::string EnigmaMachine::encipher_string(std::string message)
 }
 void EnigmaMachine::set_ring_setting(char str[])
 {
-    
+    leftRotor.set_ring(str[0]);
+    middleRotor.set_ring(str[1]);
+    rightRotor.set_ring(str[2]);
 }

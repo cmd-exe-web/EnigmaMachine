@@ -7,6 +7,7 @@ public:
     int reverseMap[26];
     int currentPosition;
     int notch;
+    int ringSetting;
     
 public:
     Rotor(int number);
@@ -21,4 +22,5 @@ public:
     void show();
 
     void set(char letter);
+    void set_ring(char letter);
 };

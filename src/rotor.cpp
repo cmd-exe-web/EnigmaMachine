@@ -40,6 +40,7 @@ Rotor::Rotor(int number)
         forwardMap[i] = rotor[i] - 'A';
         reverseMap[rotor[i] - 'A'] = i;
     }
+    ringSetting = 0;
     this->notch = notch;
 }
 Rotor::~Rotor()
@@ -56,14 +57,12 @@ void Rotor::print(){
 
 int Rotor::forwardPass(int letter)
 {
-    int shift = (letter + currentPosition) % 26;
-    return (forwardMap[shift] - currentPosition + 26) % 26;
+    return (forwardMap[(letter - ringSetting + currentPosition + 26) % 26] - currentPosition + 26) % 26;
 }
 
 int Rotor::backwardPass(int letter)
 {
-    int shift = (letter + currentPosition) % 26;
-    return (reverseMap[shift] - currentPosition + 26) % 26;
+    return (reverseMap[(letter - ringSetting + currentPosition + 26) % 26] - currentPosition + 26) % 26;
 }
 
 void Rotor::rotate()
@@ -100,4 +99,10 @@ void Rotor::set(char letter)
 {
     int number = letter - 'A';
     currentPosition = number;
+}
+
+void Rotor::set_ring(char letter)
+{
+    int number = letter - 'A';
+    ringSetting = number;
 }
