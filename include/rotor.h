@@ -6,6 +6,7 @@ public:
     int forwardMap[26];
     int reverseMap[26];
     int currentPosition;
+    int ringSetting;
     int notch;
     
 public:
@@ -21,4 +22,5 @@ public:
     void show();
 
     void set(char letter);
+    void set_ring(char letter);
 };

@@ -4,7 +4,7 @@
 #include <string>
 
 Rotor::Rotor(int number)
-    :currentPosition(0)
+    :currentPosition(0), ringSetting(0)
 {
     std::string rotor;
     int notch;
@@ -56,14 +56,18 @@ void Rotor::print(){
 
 int Rotor::forwardPass(int letter)
 {
+    std::cout << "forward pass letter: " << letter << std::endl;
     int shift = (letter + currentPosition) % 26;
-    return (forwardMap[shift] - currentPosition + 26) % 26;
+    std::cout << "shifted letter (index): " << shift << std::endl;
+    std::cout << "value at shifted letter (index): " << forwardMap[shift] << std::endl;
+    // std::cout << letter << " " << shift << " " << (forwardMap[shift] - currentPosition + 26) % 26 << std::endl;
+    return (forwardMap[shift] - currentPosition  + ringSetting + 26) % 26;
 }
 
 int Rotor::backwardPass(int letter)
 {
     int shift = (letter + currentPosition) % 26;
-    return (reverseMap[shift] - currentPosition + 26) % 26;
+    return (reverseMap[shift] - currentPosition + ringSetting + 26) % 26;
 }
 
 void Rotor::rotate()
@@ -100,4 +104,31 @@ void Rotor::set(char letter)
 {
     int number = letter - 'A';
     currentPosition = number;
+}
+
+void Rotor::set_ring(char letter)
+{
+    // mapping letter to integer equivalent
+    int shift = letter - 'A';
+    int updatedForwardMap[26];
+    ringSetting = shift;
+    for (int i = 0; i < 26; i++)
+    {
+        updatedForwardMap[i] = forwardMap[(i - shift + 26) % 26];
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        forwardMap[i] = updatedForwardMap[i];
+    }
+
+    int updatedReverseMap[26];
+
+    for (int i = 0; i < 26; i++)
+    {
+        updatedReverseMap[i] = reverseMap[(i - shift + 26) % 26];
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        reverseMap[i] = updatedReverseMap[i];
+    }
 }

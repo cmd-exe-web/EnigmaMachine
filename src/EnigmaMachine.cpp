@@ -1,4 +1,5 @@
 #include "../include/EnigmaMachine.h"
+#include <iostream>
 
 
 EnigmaMachine::EnigmaMachine(Rotor leftRotor, Rotor middleRotor, Rotor rightRotor, Reflector reflector, Keyboard keyboard, Plugboard plugboard)
@@ -19,6 +20,8 @@ void EnigmaMachine::set_key(std::string key)
 
 char EnigmaMachine::encipher(char letter)
 {
+    std::cout << rightRotor.currentPosition << std::endl;
+    rightRotor.show();
     // rotating the rotor
     if(middleRotor.currentPosition == middleRotor.notch && rightRotor.currentPosition == rightRotor.notch)
     {
@@ -42,6 +45,8 @@ char EnigmaMachine::encipher(char letter)
     {
         rightRotor.rotate();
     }
+    std::cout << rightRotor.currentPosition << std::endl;
+    rightRotor.show();
 
     // passing signal through the machine
     int signal = keyboard.forward(letter);
@@ -53,7 +58,7 @@ char EnigmaMachine::encipher(char letter)
     signal = leftRotor.backwardPass(signal);
     signal = middleRotor.backwardPass(signal);
     signal = rightRotor.backwardPass(signal);
-    signal = plugboard.backward(signal);
+    // signal = plugboard.backward(signal);
     char encoded = keyboard.backward(signal);
 
     return encoded;
@@ -71,5 +76,7 @@ std::string EnigmaMachine::encipher_string(std::string message)
 }
 void EnigmaMachine::set_ring_setting(char str[])
 {
-    
+    leftRotor.set_ring(str[0]);
+    middleRotor.set_ring(str[1]);
+    rightRotor.set_ring(str[2]);
 }
